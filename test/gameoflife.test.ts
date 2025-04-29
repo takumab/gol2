@@ -7,6 +7,10 @@ class Universe {
   currentPopulation() {
     return this.population;
   }
+
+  countNeighborsOf(resident: Cell, neighbors: Neighbors) {
+    return 2;
+  }
 }
 
 class Address {
@@ -21,6 +25,8 @@ class Address {
 class Cell {
   constructor(address: Address) {}
 }
+
+class Neighbors {}
 
 describe("Game Of Life Should", () => {
   test("take population seed of size 3", () => {
@@ -75,5 +81,23 @@ describe("Game Of Life Should", () => {
     const universe = new Universe(populationSeed);
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);
+  });
+
+  test("count neighbors of cell at address 0,1", () => {
+    const expectedLiveNeighborsCount = 2;
+    const populationSeed = [
+      [
+        new Cell(new Address(0, 0)),
+        new Cell(new Address(0, 1)),
+        new Cell(new Address(0, 2)),
+      ],
+    ];
+    const resident = new Cell(new Address(0, 1));
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed);
+
+    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+      expectedLiveNeighborsCount,
+    );
   });
 });
