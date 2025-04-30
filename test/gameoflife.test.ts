@@ -9,16 +9,31 @@ class Universe {
   }
 
   countNeighborsOf(resident: Cell, neighbors: Neighbors) {
-    if (this.population[0].length === 2) {
-      return 1;
+    const residentAddress = resident.getAddress();
+    const neighborsPositions = neighbors.getNeighborsPositions();
+    let liveNeighborsCount = 0;
+    for (
+      let neighborsPositionIndex = 0;
+      neighborsPositionIndex < neighborsPositions.length;
+      neighborsPositionIndex++
+    ) {
+      let x = neighborsPositions[neighborsPositionIndex][0];
+      let y = neighborsPositions[neighborsPositionIndex][1];
+      if (
+        this.population[residentAddress.x + x] !== undefined &&
+        this.population[residentAddress.x + x][residentAddress.y + y] !==
+          undefined
+      ) {
+        liveNeighborsCount++;
+      }
     }
-    return 2;
+    return liveNeighborsCount;
   }
 }
 
 class Address {
-  private x: number;
-  private y: number;
+  x: number;
+  y: number;
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
@@ -26,10 +41,31 @@ class Address {
 }
 
 class Cell {
-  constructor(address: Address) {}
+  private address: Address;
+  constructor(address: Address) {
+    this.address = address;
+  }
+  getAddress() {
+    return this.address;
+  }
 }
 
-class Neighbors {}
+class Neighbors {
+  private neighborsPositions = [
+    [-1, -1],
+    [0, -1],
+    [1, -1],
+    [-1, 0],
+    [1, 0],
+    [-1, 1],
+    [0, 1],
+    [1, 1],
+  ];
+
+  getNeighborsPositions() {
+    return this.neighborsPositions;
+  }
+}
 
 describe("Game Of Life Should", () => {
   test("take population seed of size 3", () => {
@@ -104,7 +140,7 @@ describe("Game Of Life Should", () => {
     );
   });
 
-  test("count neighbors of cell at address 0,1", () => {
+  test("count neighbors of cell at address 0,1 with one neighbor", () => {
     const expectedLiveNeighborsCount = 1;
     const populationSeed = [
       [new Cell(new Address(0, 0)), new Cell(new Address(0, 1))],
