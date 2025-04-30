@@ -45,8 +45,8 @@ class Cell {
 }
 
 class Neighbors {
-  private x: number;
-  private y: number;
+  private x: number = 0;
+  private y: number = 0;
   private neighborsPositions = [
     [-1, -1],
     [0, -1],
@@ -69,7 +69,7 @@ class Neighbors {
     ) {
       this.x = neighborsPositions[neighborsPositionIndex][0];
       this.y = neighborsPositions[neighborsPositionIndex][1];
-      if (this.areNeighborsInUniverse(population, residentAddress)) {
+      if (this.areNeighborsInUniverse(population, residentAddress, resident)) {
         liveNeighborsCount++;
       }
     }
@@ -82,6 +82,7 @@ class Neighbors {
   private areNeighborsInUniverse(
     population: Cell[][],
     residentAddress: Address,
+    resident: Cell,
   ) {
     return (
       population[residentAddress.x + this.x] !== undefined &&

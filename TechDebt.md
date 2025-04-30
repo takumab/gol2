@@ -1,5 +1,5 @@
 - Goal, remove Address and use Cell
   - [ ] Cell constructor should take x and y instead `Address`
     - [ ] Cell should x and y properties instead of the `address` field/property
-      - [ ] `areNeighborsInUniverse` should take resident 
+      - [X] `areNeighborsInUniverse` should take resident 
       - [ ] `areNeighborsInUniverse` should not take a residentAddress
