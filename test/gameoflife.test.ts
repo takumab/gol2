@@ -69,21 +69,14 @@ class Neighbors {
     ) {
       this.x = neighborsPositions[neighborsPositionIndex][0];
       this.y = neighborsPositions[neighborsPositionIndex][1];
-      if (this.areNeighborsInUniverse(population, residentAddress, resident)) {
+      if (this.areNeighborsInUniverse(population, resident)) {
         liveNeighborsCount++;
       }
     }
     return liveNeighborsCount;
   }
 
-  // Primitive Obsession
-  // Long Parameter
-  // Data Clump
-  private areNeighborsInUniverse(
-    population: Cell[][],
-    residentAddress: Address,
-    resident: Cell,
-  ) {
+  private areNeighborsInUniverse(population: Cell[][], resident: Cell) {
     return (
       population[resident.x + this.x] !== undefined &&
       population[resident.x + this.x][resident.y + this.y] !== undefined
