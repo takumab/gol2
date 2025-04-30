@@ -14,6 +14,10 @@ class Universe {
   countNeighborsOf(resident: Cell) {
     return this.neighbors.count(resident, this.population);
   }
+
+  nextPopulation() {
+    this.population = [[]];
+  }
 }
 
 class Address {
@@ -222,5 +226,18 @@ describe("Game Of Life Should", () => {
     expect(universe.countNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
+  });
+
+  test("kill cell with only one neighbor", () => {
+    const populationSeed = [
+      [new Cell(new Address(0, 0)), new Cell(new Address(0, 1))],
+    ];
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed, neighbors);
+    const expectedPopulation = [[]];
+
+    universe.nextPopulation();
+
+    expect(universe.currentPopulation()).toEqual(expectedPopulation);
   });
 });
