@@ -153,4 +153,57 @@ describe("Game Of Life Should", () => {
       expectedLiveNeighborsCount,
     );
   });
+
+  test("count neighbors of cell at address 1,1 with 5 neighbors", () => {
+    const expectedLiveNeighborsCount = 5;
+    const populationSeed = [
+      [
+        new Cell(new Address(0, 0)),
+        new Cell(new Address(0, 1)),
+        new Cell(new Address(0, 2)),
+      ],
+      [
+        new Cell(new Address(1, 0)),
+        new Cell(new Address(1, 1)),
+        new Cell(new Address(1, 2)),
+      ],
+    ];
+
+    const resident = new Cell(new Address(1, 1));
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed);
+
+    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+      expectedLiveNeighborsCount,
+    );
+  });
+
+  test("count neighbors of cell at address 1,1 with 8 neighbors", () => {
+    const expectedLiveNeighborsCount = 8;
+    const populationSeed = [
+      [
+        new Cell(new Address(0, 0)),
+        new Cell(new Address(0, 1)),
+        new Cell(new Address(0, 2)),
+      ],
+      [
+        new Cell(new Address(1, 0)),
+        new Cell(new Address(1, 1)),
+        new Cell(new Address(1, 2)),
+      ],
+      [
+        new Cell(new Address(2, 0)),
+        new Cell(new Address(2, 1)),
+        new Cell(new Address(2, 2)),
+      ],
+    ];
+
+    const resident = new Cell(new Address(1, 1));
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed);
+
+    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+      expectedLiveNeighborsCount,
+    );
+  });
 });
