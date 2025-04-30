@@ -55,14 +55,25 @@ class Neighbors {
     ) {
       let x = neighborsPositions[neighborsPositionIndex][0];
       let y = neighborsPositions[neighborsPositionIndex][1];
-      if (
-        population[residentAddress.x + x] !== undefined &&
-        population[residentAddress.x + x][residentAddress.y + y] !== undefined
-      ) {
+      if (this.neighborsAreInUniverse(population, residentAddress, x, y)) {
         liveNeighborsCount++;
       }
     }
     return liveNeighborsCount;
+  }
+
+  // Primitive Obsession
+  // Long method
+  private neighborsAreInUniverse(
+    population: Cell[][],
+    residentAddress: Address,
+    x: number,
+    y: number,
+  ) {
+    return (
+      population[residentAddress.x + x] !== undefined &&
+      population[residentAddress.x + x][residentAddress.y + y] !== undefined
+    );
   }
 }
 
