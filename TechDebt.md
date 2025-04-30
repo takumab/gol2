@@ -6,8 +6,10 @@
         - [X] population should take resident
   - [X] Cell constructor should not take `Address`
 
-- Goal, move `count()` to `Universe`
-  - [ ] remove `Neigbhors` class
+- Goal, Remove `Neigbhors` class
+  - [ ] remove neighbors property
+    - [ ] remove neighbors from constructor
+    - [ ] move count into Universe
     - [X] Universe should not take `Neighbors` in constructor
     - [X] should be removed from all tests
   - [ ] Cell should return `neigborsPositions`
