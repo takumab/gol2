@@ -44,10 +44,6 @@ class Neighbors {
     [1, 1],
   ];
 
-  getNeighborsPositions() {
-    return this.neighborsPositions;
-  }
-
   count(resident: Cell, population: Cell[][]) {
     const residentAddress = resident.getAddress();
     const neighborsPositions = this.neighborsPositions;
