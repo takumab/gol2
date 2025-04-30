@@ -9,30 +9,7 @@ class Universe {
   }
 
   countNeighborsOf(resident: Cell, neighbors: Neighbors) {
-    const residentAddress = resident.getAddress();
-    const neighborsPositions = neighbors.getNeighborsPositions();
-    let liveNeighborsCount = 0;
-    for (
-      let neighborsPositionIndex = 0;
-      neighborsPositionIndex < neighborsPositions.length;
-      neighborsPositionIndex++
-    ) {
-      let x = neighborsPositions[neighborsPositionIndex][0];
-      let y = neighborsPositions[neighborsPositionIndex][1];
-      if (this.isInUniverse(residentAddress, x, y)) {
-        liveNeighborsCount++;
-      }
-    }
-    return liveNeighborsCount;
-  }
-
-  // Primitive Obsession
-  private isInUniverse(residentAddress: Address, x: number, y: number) {
-    return (
-      this.population[residentAddress.x + x] !== undefined &&
-      this.population[residentAddress.x + x][residentAddress.y + y] !==
-        undefined
-    );
+    return neighbors.count(resident, this.population);
   }
 }
 
@@ -69,6 +46,27 @@ class Neighbors {
 
   getNeighborsPositions() {
     return this.neighborsPositions;
+  }
+
+  count(resident: Cell, population: Cell[][]) {
+    const residentAddress = resident.getAddress();
+    const neighborsPositions = this.neighborsPositions;
+    let liveNeighborsCount = 0;
+    for (
+      let neighborsPositionIndex = 0;
+      neighborsPositionIndex < neighborsPositions.length;
+      neighborsPositionIndex++
+    ) {
+      let x = neighborsPositions[neighborsPositionIndex][0];
+      let y = neighborsPositions[neighborsPositionIndex][1];
+      if (
+        population[residentAddress.x + x] !== undefined &&
+        population[residentAddress.x + x][residentAddress.y + y] !== undefined
+      ) {
+        liveNeighborsCount++;
+      }
+    }
+    return liveNeighborsCount;
   }
 }
 
