@@ -31,16 +31,11 @@ class Address {
 }
 
 class Cell {
-  private address: Address;
   public x: number;
   public y: number;
   constructor(address: Address) {
-    this.address = address;
     this.x = address.x;
     this.y = address.y;
-  }
-  getAddress() {
-    return this.address;
   }
 }
 
@@ -59,7 +54,6 @@ class Neighbors {
   ];
 
   count(resident: Cell, population: Cell[][]) {
-    const residentAddress = resident.getAddress();
     const neighborsPositions = this.neighborsPositions;
     let liveNeighborsCount = 0;
     for (
