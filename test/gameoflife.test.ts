@@ -19,15 +19,20 @@ class Universe {
     ) {
       let x = neighborsPositions[neighborsPositionIndex][0];
       let y = neighborsPositions[neighborsPositionIndex][1];
-      if (
-        this.population[residentAddress.x + x] !== undefined &&
-        this.population[residentAddress.x + x][residentAddress.y + y] !==
-          undefined
-      ) {
+      if (this.isInUniverse(residentAddress, x, y)) {
         liveNeighborsCount++;
       }
     }
     return liveNeighborsCount;
+  }
+
+  // Primitive Obsession
+  private isInUniverse(residentAddress: Address, x: number, y: number) {
+    return (
+      this.population[residentAddress.x + x] !== undefined &&
+      this.population[residentAddress.x + x][residentAddress.y + y] !==
+        undefined
+    );
   }
 }
 
