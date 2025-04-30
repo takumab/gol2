@@ -1,6 +1,9 @@
 class Universe {
   private population: Cell[][];
-  constructor(populationSeed: Cell[][]) {
+  private neighbors: Neighbors;
+
+  constructor(populationSeed: Cell[][], neighbors: Neighbors) {
+    this.neighbors = neighbors;
     this.population = populationSeed;
   }
 
@@ -8,8 +11,8 @@ class Universe {
     return this.population;
   }
 
-  countNeighborsOf(resident: Cell, neighbors: Neighbors) {
-    return neighbors.count(resident, this.population);
+  countNeighborsOf(resident: Cell) {
+    return this.neighbors.count(resident, this.population);
   }
 }
 
@@ -64,6 +67,7 @@ class Neighbors {
 
   // Primitive Obsession
   // Long Parameter
+  // Data Clump
   private neighborsAreInUniverse(
     population: Cell[][],
     residentAddress: Address,
@@ -95,7 +99,8 @@ describe("Game Of Life Should", () => {
       ],
     ];
 
-    const universe = new Universe(populationSeed);
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed, neighbors);
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);
   });
@@ -127,7 +132,8 @@ describe("Game Of Life Should", () => {
       ],
     ];
 
-    const universe = new Universe(populationSeed);
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed, neighbors);
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);
   });
@@ -143,9 +149,9 @@ describe("Game Of Life Should", () => {
     ];
     const resident = new Cell(new Address(0, 1));
     const neighbors = new Neighbors();
-    const universe = new Universe(populationSeed);
+    const universe = new Universe(populationSeed, neighbors);
 
-    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+    expect(universe.countNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -157,9 +163,9 @@ describe("Game Of Life Should", () => {
     ];
     const resident = new Cell(new Address(0, 1));
     const neighbors = new Neighbors();
-    const universe = new Universe(populationSeed);
+    const universe = new Universe(populationSeed, neighbors);
 
-    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+    expect(universe.countNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -181,9 +187,9 @@ describe("Game Of Life Should", () => {
 
     const resident = new Cell(new Address(1, 1));
     const neighbors = new Neighbors();
-    const universe = new Universe(populationSeed);
+    const universe = new Universe(populationSeed, neighbors);
 
-    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+    expect(universe.countNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -210,9 +216,9 @@ describe("Game Of Life Should", () => {
 
     const resident = new Cell(new Address(1, 1));
     const neighbors = new Neighbors();
-    const universe = new Universe(populationSeed);
+    const universe = new Universe(populationSeed, neighbors);
 
-    expect(universe.countNeighborsOf(resident, neighbors)).toEqual(
+    expect(universe.countNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
