@@ -20,23 +20,13 @@ class Universe {
   }
 }
 
-// Man in the middle
-class Address {
-  x: number;
-  y: number;
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
 class Cell {
   public x: number;
   public y: number;
 
-  constructor(address: Address, x: number, y: number) {
-    this.x = address.x;
-    this.y = address.y;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -82,20 +72,10 @@ class Neighbors {
 describe("Game Of Life Should", () => {
   test("take population seed of size 3", () => {
     const expectedPopulation = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
     ];
 
-    const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-    ];
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
 
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
@@ -105,29 +85,13 @@ describe("Game Of Life Should", () => {
 
   test("take population seed of size 6", () => {
     const expectedPopulation = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-      [
-        new Cell(new Address(1, 0), 1, 0),
-        new Cell(new Address(1, 1), 1, 1),
-        new Cell(new Address(1, 2), 1, 2),
-      ],
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
+      [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)],
     ];
 
     const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-      [
-        new Cell(new Address(1, 0), 1, 0),
-        new Cell(new Address(1, 1), 1, 1),
-        new Cell(new Address(1, 2), 1, 2),
-      ],
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
+      [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)],
     ];
 
     const neighbors = new Neighbors();
@@ -138,14 +102,8 @@ describe("Game Of Life Should", () => {
 
   test("count neighbors of cell at address 0,1", () => {
     const expectedLiveNeighborsCount = 2;
-    const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-    ];
-    const resident = new Cell(new Address(0, 1), 0, 1);
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
+    const resident = new Cell(0, 1);
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
 
@@ -156,10 +114,8 @@ describe("Game Of Life Should", () => {
 
   test("count neighbors of cell at address 0,1 with one neighbor", () => {
     const expectedLiveNeighborsCount = 1;
-    const populationSeed = [
-      [new Cell(new Address(0, 0), 0, 0), new Cell(new Address(0, 1), 0, 1)],
-    ];
-    const resident = new Cell(new Address(0, 1), 0, 1);
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 1)]];
+    const resident = new Cell(0, 1);
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
 
@@ -171,19 +127,11 @@ describe("Game Of Life Should", () => {
   test("count neighbors of cell at address 1,1 with 5 neighbors", () => {
     const expectedLiveNeighborsCount = 5;
     const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-      [
-        new Cell(new Address(1, 0), 1, 0),
-        new Cell(new Address(1, 1), 1, 1),
-        new Cell(new Address(1, 2), 1, 2),
-      ],
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
+      [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)],
     ];
 
-    const resident = new Cell(new Address(1, 1), 1, 1);
+    const resident = new Cell(1, 1);
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
 
@@ -195,24 +143,12 @@ describe("Game Of Life Should", () => {
   test("count neighbors of cell at address 1,1 with 8 neighbors", () => {
     const expectedLiveNeighborsCount = 8;
     const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-      [
-        new Cell(new Address(1, 0), 1, 0),
-        new Cell(new Address(1, 1), 1, 1),
-        new Cell(new Address(1, 2), 1, 2),
-      ],
-      [
-        new Cell(new Address(2, 0), 2, 0),
-        new Cell(new Address(2, 1), 2, 1),
-        new Cell(new Address(2, 2), 2, 2),
-      ],
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
+      [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)],
+      [new Cell(2, 0), new Cell(2, 1), new Cell(2, 2)],
     ];
 
-    const resident = new Cell(new Address(1, 1), 1, 1);
+    const resident = new Cell(1, 1);
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
 
@@ -222,9 +158,7 @@ describe("Game Of Life Should", () => {
   });
 
   test("kill cell with only one neighbor", () => {
-    const populationSeed = [
-      [new Cell(new Address(0, 0), 0, 0), new Cell(new Address(0, 1), 0, 1)],
-    ];
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 1)]];
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
     const expectedPopulation = [[]];
@@ -235,13 +169,7 @@ describe("Game Of Life Should", () => {
   });
 
   test("preserve cell with only two live neighbors", () => {
-    const populationSeed = [
-      [
-        new Cell(new Address(0, 0), 0, 0),
-        new Cell(new Address(0, 1), 0, 1),
-        new Cell(new Address(0, 2), 0, 2),
-      ],
-    ];
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
     const expectedPopulation = [[]];

@@ -4,4 +4,4 @@
       - [X] `areNeighborsInUniverse` should take resident 
       - [X] `areNeighborsInUniverse` should not take a residentAddress
         - [X] population should take resident
-  - [ ] Cell constructor should not take `Address`
+  - [X] Cell constructor should not take `Address`
