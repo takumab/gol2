@@ -5,3 +5,14 @@
       - [X] `areNeighborsInUniverse` should not take a residentAddress
         - [X] population should take resident
   - [X] Cell constructor should not take `Address`
+
+- Goal, move `count()` to `Universe`
+  - [ ] remove `Neigbhors` class
+    - [X] Universe should not take `Neighbors` in constructor
+    - [X] should be removed from all tests
+  - [ ] Cell should return `neigborsPositions`
+    - [ ] `count()` in Universe should take the `neighborsPositions`
+  - [ ] `count()` should not take `population`
+  - [ ] `count()` should be called `countLiveNeighborsOf()`
+    - [ ] `countLiveNeighborsOf()` should take a Cell
+  - [ ] `areNeighborsInUniverse` should live in the Universe
