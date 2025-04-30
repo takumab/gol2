@@ -36,6 +36,8 @@ class Cell {
 }
 
 class Neighbors {
+  private x: number;
+  private y: number;
   private neighborsPositions = [
     [-1, -1],
     [0, -1],
@@ -56,9 +58,9 @@ class Neighbors {
       neighborsPositionIndex < neighborsPositions.length;
       neighborsPositionIndex++
     ) {
-      let x = neighborsPositions[neighborsPositionIndex][0];
-      let y = neighborsPositions[neighborsPositionIndex][1];
-      if (this.neighborsAreInUniverse(population, residentAddress, x, y)) {
+      this.x = neighborsPositions[neighborsPositionIndex][0];
+      this.y = neighborsPositions[neighborsPositionIndex][1];
+      if (this.areNeighborsInUniverse(population, residentAddress)) {
         liveNeighborsCount++;
       }
     }
@@ -68,15 +70,14 @@ class Neighbors {
   // Primitive Obsession
   // Long Parameter
   // Data Clump
-  private neighborsAreInUniverse(
+  private areNeighborsInUniverse(
     population: Cell[][],
     residentAddress: Address,
-    x: number,
-    y: number,
   ) {
     return (
-      population[residentAddress.x + x] !== undefined &&
-      population[residentAddress.x + x][residentAddress.y + y] !== undefined
+      population[residentAddress.x + this.x] !== undefined &&
+      population[residentAddress.x + this.x][residentAddress.y + this.y] !==
+        undefined
     );
   }
 }
