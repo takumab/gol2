@@ -20,6 +20,7 @@ class Universe {
   }
 }
 
+// Man in the middle
 class Address {
   x: number;
   y: number;
@@ -31,8 +32,12 @@ class Address {
 
 class Cell {
   private address: Address;
+  private x: number;
+  private y: number;
   constructor(address: Address) {
     this.address = address;
+    this.x = address.x;
+    this.y = address.y;
   }
   getAddress() {
     return this.address;
@@ -231,6 +236,23 @@ describe("Game Of Life Should", () => {
   test("kill cell with only one neighbor", () => {
     const populationSeed = [
       [new Cell(new Address(0, 0)), new Cell(new Address(0, 1))],
+    ];
+    const neighbors = new Neighbors();
+    const universe = new Universe(populationSeed, neighbors);
+    const expectedPopulation = [[]];
+
+    universe.nextPopulation();
+
+    expect(universe.currentPopulation()).toEqual(expectedPopulation);
+  });
+
+  test("preserve cell with only two live neighbors", () => {
+    const populationSeed = [
+      [
+        new Cell(new Address(0, 0)),
+        new Cell(new Address(0, 1)),
+        new Cell(new Address(0, 2)),
+      ],
     ];
     const neighbors = new Neighbors();
     const universe = new Universe(populationSeed, neighbors);
