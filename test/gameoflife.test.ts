@@ -63,7 +63,7 @@ class Neighbors {
   }
 
   // Primitive Obsession
-  // Long method
+  // Long Parameter
   private neighborsAreInUniverse(
     population: Cell[][],
     residentAddress: Address,
