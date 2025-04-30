@@ -32,8 +32,8 @@ class Address {
 
 class Cell {
   private address: Address;
-  private x: number;
-  private y: number;
+  public x: number;
+  public y: number;
   constructor(address: Address) {
     this.address = address;
     this.x = address.x;
@@ -85,9 +85,8 @@ class Neighbors {
     resident: Cell,
   ) {
     return (
-      population[residentAddress.x + this.x] !== undefined &&
-      population[residentAddress.x + this.x][residentAddress.y + this.y] !==
-        undefined
+      population[resident.x + this.x] !== undefined &&
+      population[resident.x + this.x][resident.y + this.y] !== undefined
     );
   }
 }

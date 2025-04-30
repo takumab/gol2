@@ -3,3 +3,4 @@
     - [ ] Cell should x and y properties instead of the `address` field/property
       - [X] `areNeighborsInUniverse` should take resident 
       - [ ] `areNeighborsInUniverse` should not take a residentAddress
+        - [X] population should take resident
