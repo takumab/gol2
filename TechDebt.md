@@ -8,14 +8,16 @@
 
 - Goal, Remove `Neigbhors` class
   - [ ] remove neighbors property
-    - [ ] remove neighbors from constructor
-    - [ ] move count into Universe
+    - [X] remove neighbors from constructor
+    - [X] move count into Universe
     - [X] Universe should not take `Neighbors` in constructor
     - [X] should be removed from all tests
   - [ ] Cell should return `neigborsPositions`
-    - [ ] `count()` in Universe should take the `neighborsPositions`
-  - [ ] `count()` should not take `population`
+    - [X] `count()` in Universe should take the `neighborsPositions`
+  - [X] `count()` should not take `population`
   - [ ] `count()` should be called `countLiveNeighborsOf()`
     - [ ] `countLiveNeighborsOf()` should take a Cell
-  - [ ] `areNeighborsInUniverse` should live in the Universe
-    - [ ] `areNeighborsInUniverse` should take x and y
+  - [X] `areNeighborsInUniverse` should live in the Universe
+    - [X] `areNeighborsInUniverse` should take x and y
+  - [X] `areNeighborsInUniverse` should not take population
+    - [X] `areNeighborsInUniverse` should use the population property in Universe

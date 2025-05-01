@@ -1,9 +1,7 @@
 class Universe {
   private population: Cell[][];
-  private neighbors: Neighbors;
 
   constructor(populationSeed: Cell[][]) {
-    this.neighbors = new Neighbors();
     this.population = populationSeed;
   }
 
@@ -12,22 +10,43 @@ class Universe {
   }
 
   countNeighborsOf(resident: Cell) {
-    return this.neighbors.count(resident, this.population);
+    const neighborsPositions = [
+      [-1, -1],
+      [0, -1],
+      [1, -1],
+      [-1, 0],
+      [1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+    ];
+
+    return this.count(resident, neighborsPositions);
   }
 
+  count(resident: Cell, neighborsPositions: number[][]) {
+    let liveNeighborsCount = 0;
+    for (
+      let neighborsPositionIndex = 0;
+      neighborsPositionIndex < neighborsPositions.length;
+      neighborsPositionIndex++
+    ) {
+      let x = neighborsPositions[neighborsPositionIndex][0];
+      let y = neighborsPositions[neighborsPositionIndex][1];
+      if (this.areNeighborsInUniverse(resident, x, y)) {
+        liveNeighborsCount++;
+      }
+    }
+    return liveNeighborsCount;
+  }
   nextPopulation() {
     this.population = [[]];
   }
 
-  private areNeighborsInUniverse(
-    population: Cell[][],
-    resident: Cell,
-    x: number,
-    y: number,
-  ) {
+  private areNeighborsInUniverse(resident: Cell, x: number, y: number) {
     return (
-      population[resident.x + x] !== undefined &&
-      population[resident.x + x][resident.y + y] !== undefined
+      this.population[resident.x + x] !== undefined &&
+      this.population[resident.x + x][resident.y + y] !== undefined
     );
   }
 }
@@ -39,45 +58,6 @@ class Cell {
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
-  }
-}
-
-class Neighbors {
-  private x: number = 0;
-  private y: number = 0;
-  private neighborsPositions = [
-    [-1, -1],
-    [0, -1],
-    [1, -1],
-    [-1, 0],
-    [1, 0],
-    [-1, 1],
-    [0, 1],
-    [1, 1],
-  ];
-
-  count(resident: Cell, population: Cell[][]) {
-    const neighborsPositions = this.neighborsPositions;
-    let liveNeighborsCount = 0;
-    for (
-      let neighborsPositionIndex = 0;
-      neighborsPositionIndex < neighborsPositions.length;
-      neighborsPositionIndex++
-    ) {
-      this.x = neighborsPositions[neighborsPositionIndex][0];
-      this.y = neighborsPositions[neighborsPositionIndex][1];
-      if (this.areNeighborsInUniverse(population, resident)) {
-        liveNeighborsCount++;
-      }
-    }
-    return liveNeighborsCount;
-  }
-
-  private areNeighborsInUniverse(population: Cell[][], resident: Cell) {
-    return (
-      population[resident.x + this.x] !== undefined &&
-      population[resident.x + this.x][resident.y + this.y] !== undefined
-    );
   }
 }
 
