@@ -10,21 +10,11 @@ class Universe {
   }
 
   countNeighborsOf(resident: Cell) {
-    const neighborsPositions = [
-      [-1, -1],
-      [0, -1],
-      [1, -1],
-      [-1, 0],
-      [1, 0],
-      [-1, 1],
-      [0, 1],
-      [1, 1],
-    ];
-
-    return this.count(resident, neighborsPositions);
+    return this.count(resident);
   }
 
-  count(resident: Cell, neighborsPositions: number[][]) {
+  count(resident: Cell) {
+    const neighborsPositions = resident.getNeighborsPositions();
     let liveNeighborsCount = 0;
     for (
       let neighborsPositionIndex = 0;
@@ -54,10 +44,23 @@ class Universe {
 class Cell {
   public x: number;
   public y: number;
+  private neighborsPositions = [
+    [-1, -1],
+    [0, -1],
+    [1, -1],
+    [-1, 0],
+    [1, 0],
+    [-1, 1],
+    [0, 1],
+    [1, 1],
+  ];
 
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
+  }
+  getNeighborsPositions() {
+    return this.neighborsPositions;
   }
 }
 

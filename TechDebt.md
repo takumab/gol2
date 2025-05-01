@@ -7,13 +7,16 @@
   - [X] Cell constructor should not take `Address`
 
 - Goal, Remove `Neigbhors` class
-  - [ ] remove neighbors property
+  - [X] remove neighbors property
     - [X] remove neighbors from constructor
     - [X] move count into Universe
     - [X] Universe should not take `Neighbors` in constructor
     - [X] should be removed from all tests
-  - [ ] Cell should return `neigborsPositions`
-    - [X] `count()` in Universe should take the `neighborsPositions`
+  - [X] count should use neighborsPositions from Cell 
+    - [X] Cell should return `neigborsPositions`
+      - [X] `count()` in Universe should take the `neighborsPositions`
+        - [X] `count()` should not take `neighborsPositions`
+      - [X] `countNeighborsOf` should not have neighborsPositions collection
   - [X] `count()` should not take `population`
   - [ ] `count()` should be called `countLiveNeighborsOf()`
     - [ ] `countLiveNeighborsOf()` should take a Cell
