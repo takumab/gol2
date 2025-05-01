@@ -18,6 +18,18 @@ class Universe {
   nextPopulation() {
     this.population = [[]];
   }
+
+  private areNeighborsInUniverse(
+    population: Cell[][],
+    resident: Cell,
+    x: number,
+    y: number,
+  ) {
+    return (
+      population[resident.x + x] !== undefined &&
+      population[resident.x + x][resident.y + y] !== undefined
+    );
+  }
 }
 
 class Cell {

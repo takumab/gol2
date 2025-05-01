@@ -18,3 +18,4 @@
   - [ ] `count()` should be called `countLiveNeighborsOf()`
     - [ ] `countLiveNeighborsOf()` should take a Cell
   - [ ] `areNeighborsInUniverse` should live in the Universe
+    - [ ] `areNeighborsInUniverse` should take x and y
