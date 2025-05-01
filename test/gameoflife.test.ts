@@ -55,6 +55,7 @@ class Cell {
     this.x = x;
     this.y = y;
   }
+
   getNeighborsPositions() {
     return this.neighborsPositions;
   }
