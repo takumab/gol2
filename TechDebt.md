@@ -18,9 +18,11 @@
         - [X] `count()` should not take `neighborsPositions`
       - [X] `countNeighborsOf` should not have neighborsPositions collection
   - [X] `count()` should not take `population`
-  - [ ] `count()` should be called `countLiveNeighborsOf()`
-    - [ ] `countLiveNeighborsOf()` should take a Cell
+  - [X] `count()` should be called `countLiveNeighborsOf()`
+    - [X] `countLiveNeighborsOf()` should take a Cell
   - [X] `areNeighborsInUniverse` should live in the Universe
     - [X] `areNeighborsInUniverse` should take x and y
   - [X] `areNeighborsInUniverse` should not take population
     - [X] `areNeighborsInUniverse` should use the population property in Universe
+  - [X] test should use `countLiveNeighborsOf`
+  - [X] test should not use `countNeighborsOf`

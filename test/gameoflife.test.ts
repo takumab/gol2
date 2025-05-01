@@ -9,11 +9,7 @@ class Universe {
     return this.population;
   }
 
-  countNeighborsOf(resident: Cell) {
-    return this.count(resident);
-  }
-
-  count(resident: Cell) {
+  countLiveNeighborsOf(resident: Cell) {
     const neighborsPositions = resident.getNeighborsPositions();
     let liveNeighborsCount = 0;
     for (
@@ -99,7 +95,7 @@ describe("Game Of Life Should", () => {
     const resident = new Cell(0, 1);
     const universe = new Universe(populationSeed);
 
-    expect(universe.countNeighborsOf(resident)).toEqual(
+    expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -110,7 +106,7 @@ describe("Game Of Life Should", () => {
     const resident = new Cell(0, 1);
     const universe = new Universe(populationSeed);
 
-    expect(universe.countNeighborsOf(resident)).toEqual(
+    expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -125,7 +121,7 @@ describe("Game Of Life Should", () => {
     const resident = new Cell(1, 1);
     const universe = new Universe(populationSeed);
 
-    expect(universe.countNeighborsOf(resident)).toEqual(
+    expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
@@ -141,7 +137,7 @@ describe("Game Of Life Should", () => {
     const resident = new Cell(1, 1);
     const universe = new Universe(populationSeed);
 
-    expect(universe.countNeighborsOf(resident)).toEqual(
+    expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
     );
   });
