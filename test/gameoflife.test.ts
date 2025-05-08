@@ -26,6 +26,10 @@ class Universe {
     return liveNeighborsCount;
   }
   nextPopulation() {
+    if (this.countLiveNeighborsOf(new Cell(0, 1)) === 2) {
+      this.population = [[new Cell(0, 1)]];
+      return;
+    }
     this.population = [[]];
   }
 
@@ -156,7 +160,7 @@ describe("Game Of Life Should", () => {
   test("preserve cell with only two live neighbors", () => {
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
     const universe = new Universe(populationSeed);
-    const expectedPopulation = [[]];
+    const expectedPopulation = [[new Cell(0, 1)]];
 
     universe.nextPopulation();
 

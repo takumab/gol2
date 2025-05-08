@@ -26,3 +26,7 @@
     - [X] `areNeighborsInUniverse` should use the population property in Universe
   - [X] test should use `countLiveNeighborsOf`
   - [X] test should not use `countNeighborsOf`
+
+- Goal, change state of population in Universe
+  - [ ] livingNeighborsCount should be used in `nextPopulation`
+    - [ ] livingNeighborsCount should be a property of Universe
