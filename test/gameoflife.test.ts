@@ -26,11 +26,15 @@ class Universe {
     return this.liveNeighborsCount;
   }
   nextPopulation() {
-    if (this.liveNeighborsCount === 2 || this.liveNeighborsCount === 3) {
+    if (this.isLiveCellWithTwoOrThreeLiveNeighbors()) {
       this.population = [[new Cell(0, 1)]];
       return;
     }
     this.population = [[]];
+  }
+
+  private isLiveCellWithTwoOrThreeLiveNeighbors() {
+    return this.liveNeighborsCount === 2 || this.liveNeighborsCount === 3;
   }
 
   private areNeighborsInUniverse(resident: Cell, x: number, y: number) {
