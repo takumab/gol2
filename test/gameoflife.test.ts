@@ -1,5 +1,6 @@
 class Universe {
   private population: Cell[][];
+  private liveNeighborsCount = 0;
 
   constructor(populationSeed: Cell[][]) {
     this.population = populationSeed;
@@ -11,7 +12,6 @@ class Universe {
 
   countLiveNeighborsOf(resident: Cell) {
     const neighborsPositions = resident.getNeighborsPositions();
-    let liveNeighborsCount = 0;
     for (
       let neighborsPositionIndex = 0;
       neighborsPositionIndex < neighborsPositions.length;
@@ -20,13 +20,13 @@ class Universe {
       let x = neighborsPositions[neighborsPositionIndex][0];
       let y = neighborsPositions[neighborsPositionIndex][1];
       if (this.areNeighborsInUniverse(resident, x, y)) {
-        liveNeighborsCount++;
+        this.liveNeighborsCount++;
       }
     }
-    return liveNeighborsCount;
+    return this.liveNeighborsCount;
   }
   nextPopulation() {
-    if (this.countLiveNeighborsOf(new Cell(0, 1)) === 2) {
+    if (this.liveNeighborsCount === 2) {
       this.population = [[new Cell(0, 1)]];
       return;
     }
@@ -162,6 +162,9 @@ describe("Game Of Life Should", () => {
     const universe = new Universe(populationSeed);
     const expectedPopulation = [[new Cell(0, 1)]];
 
+    const resident = new Cell(0, 1);
+
+    universe.countLiveNeighborsOf(resident);
     universe.nextPopulation();
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);

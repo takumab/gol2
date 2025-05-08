@@ -28,5 +28,6 @@
   - [X] test should not use `countNeighborsOf`
 
 - Goal, change state of population in Universe
-  - [ ] livingNeighborsCount should be used in `nextPopulation`
-    - [ ] livingNeighborsCount should be a property of Universe
+  - [X] livingNeighborsCount should be used in `nextPopulation`
+    - [X] livingNeighborsCount should be a property of Universe
+    - [X] `this.livingNeighborsCount` should be used instead of `this.countLiveNeighborsOf`
