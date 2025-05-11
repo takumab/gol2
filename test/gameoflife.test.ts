@@ -1,6 +1,5 @@
 class Universe {
   private population: Cell[][];
-  private liveNeighborsCount = 0;
 
   constructor(populationSeed: Cell[][]) {
     this.population = populationSeed;
