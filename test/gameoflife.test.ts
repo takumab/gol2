@@ -32,6 +32,10 @@ class Universe {
       this.population = [[]];
       return;
     }
+    if (liveNeighborsCount > 3) {
+      this.population = [[]];
+      return;
+    }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       this.population = [
         this.population
@@ -195,6 +199,21 @@ describe("Game Of Life Should", () => {
     ];
     const universe = new Universe(populationSeed);
     const expectedPopulation = [[new Cell(0, 1)]];
+
+    const resident = new Cell(0, 1);
+
+    universe.nextPopulation(resident);
+
+    expect(universe.currentPopulation()).toEqual(expectedPopulation);
+  });
+
+  test("remove cell with more than three live neighbors", () => {
+    const populationSeed = [
+      [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
+      [new Cell(1, 0), new Cell(1, 1)],
+    ];
+    const universe = new Universe(populationSeed);
+    const expectedPopulation = [[]];
 
     const resident = new Cell(0, 1);
 
