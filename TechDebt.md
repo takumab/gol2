@@ -30,4 +30,4 @@
 - Goal, change state of population in Universe
   - [X] livingNeighborsCount should be used in `nextPopulation`
     - [X] livingNeighborsCount should be a property of Universe
-    - [X] `this.livingNeighborsCount` should be used instead of `this.countLiveNeighborsOf`
+    - [X] `this.livingNeighborsCount` should be used instead of `this.countLiveNeighborsOf`2
