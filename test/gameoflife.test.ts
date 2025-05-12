@@ -29,36 +29,43 @@ class Universe {
   nextPopulation(resident: Cell) {
     const liveNeighborsCount = this.countLiveNeighborsOf(resident);
     if (liveNeighborsCount < 2) {
-      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
-            this.population[rowIndex].splice(columnIndex);
-        }
-      }
+      this.removeLiveNeighbors()
       new Universe(this.population);
     }
     if (liveNeighborsCount > 3) {
-      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
-          this.population[rowIndex].splice(columnIndex);
-        }
-      }
+      this.removeLiveNeighbors();
       this.population.pop();
       new Universe(this.population);
     }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
+        for (
+          let columnIndex = 0;
+          columnIndex < this.population[rowIndex].length;
+          columnIndex++
+        ) {
           if (!resident.equals(this.population[rowIndex][columnIndex])) {
             this.population[rowIndex].splice(columnIndex, 1);
           }
         }
       }
 
-      // there's a better way I'm sure
       if (this.population.length > 1) {
         this.population.pop();
       }
       new Universe(this.population);
+    }
+  }
+
+  private removeLiveNeighbors() {
+    for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.population[rowIndex].length;
+        columnIndex++
+      ) {
+        this.population[rowIndex].splice(columnIndex);
+      }
     }
   }
 
