@@ -28,16 +28,16 @@ class Universe {
 
   nextPopulation(resident: Cell) {
     const liveNeighborsCount = this.countLiveNeighborsOf(resident);
-    if (liveNeighborsCount < 2) {
-      this.removeLiveNeighbors()
+    if (this.isLessThanTwoLiveNeighbors(liveNeighborsCount)) {
+      this.removeLiveNeighbors();
       new Universe(this.population);
     }
-    if (liveNeighborsCount > 3) {
+    if (this.isMoreThanThreeLiveNeighbors(liveNeighborsCount)) {
       this.removeLiveNeighbors();
       this.population.pop();
       new Universe(this.population);
     }
-    if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
+    if (this.isTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
         for (
           let columnIndex = 0;
@@ -57,6 +57,14 @@ class Universe {
     }
   }
 
+  private isLessThanTwoLiveNeighbors(liveNeighborsCount: number) {
+    return liveNeighborsCount < 2;
+  }
+
+  private isMoreThanThreeLiveNeighbors(liveNeighborsCount: number) {
+    return liveNeighborsCount > 3;
+  }
+
   private removeLiveNeighbors() {
     for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
       for (
@@ -69,7 +77,7 @@ class Universe {
     }
   }
 
-  private isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount: number) {
+  private isTwoOrThreeLiveNeighbors(liveNeighborsCount: number) {
     return liveNeighborsCount === 2 || liveNeighborsCount === 3;
   }
 
