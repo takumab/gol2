@@ -34,7 +34,7 @@ class Universe {
             this.population[rowIndex].splice(columnIndex);
         }
       }
-      return new Universe(this.population);
+      new Universe(this.population);
     }
     if (liveNeighborsCount > 3) {
       for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
@@ -43,7 +43,7 @@ class Universe {
         }
       }
       this.population.pop();
-      return new Universe(this.population);
+      new Universe(this.population);
     }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       this.population = [
@@ -53,7 +53,7 @@ class Universe {
           )
           .flat(),
       ];
-      return new Universe(this.population);
+      new Universe(this.population);
     }
   }
 
