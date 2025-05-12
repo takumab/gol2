@@ -26,3 +26,11 @@
     - [X] `areNeighborsInUniverse` should use the population property in Universe
   - [X] test should use `countLiveNeighborsOf`
   - [X] test should not use `countNeighborsOf`
+
+## Goal - Have `nextPopulation` return a new Universe with the next popluation
+- [X] `nextPopulation` should return a new Universe
+  - [X] Universe should take a new population 
+- [ ] `nextPopulation` should check if a live cell has fewer than two live neighbors
+- [ ] `nextPopulation` should check if a live cell has two or three live neighbors
+- [ ] `nextPopulation` should check if a live cell has more than three live neighbors
+- [ ] `nextPopulation` should check if a dead cell has exactly three live neighbors

@@ -29,12 +29,16 @@ class Universe {
   nextPopulation(resident: Cell) {
     const liveNeighborsCount = this.countLiveNeighborsOf(resident);
     if (liveNeighborsCount < 2) {
-      this.population = [[]];
-      return;
+      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
+            this.population[rowIndex].splice(columnIndex);
+        }
+      }
+      return new Universe(this.population);
     }
     if (liveNeighborsCount > 3) {
       this.population = [[]];
-      return;
+      return new Universe(this.population);
     }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       this.population = [
@@ -44,7 +48,7 @@ class Universe {
           )
           .flat(),
       ];
-      return;
+      return new Universe(this.population);
     }
   }
 
