@@ -37,7 +37,12 @@ class Universe {
       return new Universe(this.population);
     }
     if (liveNeighborsCount > 3) {
-      this.population = [[]];
+      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
+          this.population[rowIndex].splice(columnIndex);
+        }
+      }
+      this.population.pop();
       return new Universe(this.population);
     }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
