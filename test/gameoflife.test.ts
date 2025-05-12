@@ -46,13 +46,18 @@ class Universe {
       new Universe(this.population);
     }
     if (this.isLiveCellWithTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
-      this.population = [
-        this.population
-          .map((cell: Cell[]) =>
-            cell.filter((cell: Cell) => resident.equals(cell)),
-          )
-          .flat(),
-      ];
+      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < this.population[rowIndex].length; columnIndex++) {
+          if (!resident.equals(this.population[rowIndex][columnIndex])) {
+            this.population[rowIndex].splice(columnIndex, 1);
+          }
+        }
+      }
+
+      // there's a better way I'm sure
+      if (this.population.length > 1) {
+        this.population.pop();
+      }
       new Universe(this.population);
     }
   }
