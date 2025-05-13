@@ -38,22 +38,26 @@ class Universe {
       new Universe(this.population);
     }
     if (this.isTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
-      for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
-        for (
-          let columnIndex = 0;
-          columnIndex < this.population[rowIndex].length;
-          columnIndex++
-        ) {
-          if (!resident.equals(this.population[rowIndex][columnIndex])) {
-            this.population[rowIndex].splice(columnIndex, 1);
-          }
-        }
-      }
+      this.removeLiveNeighborsOf(resident);
 
       if (this.population.length > 1) {
         this.population.pop();
       }
       new Universe(this.population);
+    }
+  }
+
+  private removeLiveNeighborsOf(resident: Cell) {
+    for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.population[rowIndex].length;
+        columnIndex++
+      ) {
+        if (!resident.equals(this.population[rowIndex][columnIndex])) {
+          this.population[rowIndex].splice(columnIndex, 1);
+        }
+      }
     }
   }
 
