@@ -39,10 +39,7 @@ class Universe {
     }
     if (this.isTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       this.removeLiveNeighborsOf(resident);
-
-      if (this.population.length > 1) {
-        this.population.pop();
-      }
+      if (this.population.length > 1) this.population.pop();
       new Universe(this.population);
     }
   }
