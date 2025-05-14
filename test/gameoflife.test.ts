@@ -29,8 +29,8 @@ class Universe {
   nextPopulation(resident: Cell) {
     const liveNeighborsCount = this.countLiveNeighborsOf(resident);
     if (this.isLessThanTwoLiveNeighbors(liveNeighborsCount)) {
-      this.removeLiveNeighbors();
-      new Universe(this.population);
+      const newPopulation = this.removeLiveNeighbors();
+      new Universe(newPopulation);
     }
     if (this.isMoreThanThreeLiveNeighbors(liveNeighborsCount)) {
       this.removeLiveNeighbors();
@@ -62,11 +62,11 @@ class Universe {
       );
   }
 
-  private removeLiveNeighbors() {
+  private removeLiveNeighbors(): Cell[][] {
     const FIRST_ROW = 0;
     const people = this.population[FIRST_ROW];
-    people.map((person: Cell) =>
-      this.population[0].splice(this.population[0].indexOf(person)),
+    return people.map((person: Cell, _, people: Cell[]) =>
+      people.splice(people.indexOf(person)),
     );
   }
 
