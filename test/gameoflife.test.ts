@@ -62,15 +62,10 @@ class Universe {
   }
 
   private removeLiveNeighbors() {
-    for (let rowIndex = 0; rowIndex < this.population.length; rowIndex++) {
-      for (
-        let columnIndex = 0;
-        columnIndex < this.population[rowIndex].length;
-        columnIndex++
-      ) {
-        this.population[rowIndex].splice(columnIndex);
-      }
-    }
+    const people = this.population[0];
+    people.map((person: Cell) =>
+      this.population[0].splice(this.population[0].indexOf(person)),
+    );
   }
 
   private isTwoOrThreeLiveNeighbors(liveNeighborsCount: number) {
