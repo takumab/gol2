@@ -45,11 +45,11 @@ class Universe {
   }
 
   private removeLiveNeighborsOf(resident: Cell) {
-    const people = this.population[0]
+    const people = this.population[0];
+    people.filter((person: Cell) => !resident.equals(person));
+
     for (const person of people) {
-      if (!resident.equals(person)) {
-        this.population[0].splice(this.population[0].indexOf(person), 1);
-      }
+      this.population[0].splice(this.population[0].indexOf(person), 1);
     }
   }
 
