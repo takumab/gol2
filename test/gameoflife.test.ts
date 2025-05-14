@@ -46,11 +46,11 @@ class Universe {
 
   private removeLiveNeighborsOf(resident: Cell) {
     const people = this.population[0];
-    people.filter((person: Cell) => !resident.equals(person));
-
-    for (const person of people) {
-      this.population[0].splice(this.population[0].indexOf(person), 1);
-    }
+    people
+      .filter((person: Cell) => !resident.equals(person))
+      .map((person: Cell) =>
+        this.population[0].splice(this.population[0].indexOf(person), 1),
+      );
   }
 
   private isLessThanTwoLiveNeighbors(liveNeighborsCount: number) {
