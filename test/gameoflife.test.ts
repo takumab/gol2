@@ -53,7 +53,8 @@ class Universe {
   }
 
   private removeLiveNeighborsOf(resident: Cell) {
-    const people = this.population[0];
+    const FIRST_ROW = 0;
+    const people = this.population[FIRST_ROW];
     people
       .filter((person: Cell) => !resident.equals(person))
       .map((person: Cell) =>
@@ -62,7 +63,8 @@ class Universe {
   }
 
   private removeLiveNeighbors() {
-    const people = this.population[0];
+    const FIRST_ROW = 0;
+    const people = this.population[FIRST_ROW];
     people.map((person: Cell) =>
       this.population[0].splice(this.population[0].indexOf(person)),
     );
@@ -72,6 +74,7 @@ class Universe {
     return liveNeighborsCount === 2 || liveNeighborsCount === 3;
   }
 
+  // Data Clump
   private areNeighborsInUniverse(resident: Cell, x: number, y: number) {
     return (
       this.population[resident.x + x] !== undefined &&
