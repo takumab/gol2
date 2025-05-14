@@ -44,6 +44,14 @@ class Universe {
     }
   }
 
+  private isLessThanTwoLiveNeighbors(liveNeighborsCount: number) {
+    return liveNeighborsCount < 2;
+  }
+
+  private isMoreThanThreeLiveNeighbors(liveNeighborsCount: number) {
+    return liveNeighborsCount > 3;
+  }
+
   private removeLiveNeighborsOf(resident: Cell) {
     const people = this.population[0];
     people
@@ -51,14 +59,6 @@ class Universe {
       .map((person: Cell) =>
         this.population[0].splice(this.population[0].indexOf(person), 1),
       );
-  }
-
-  private isLessThanTwoLiveNeighbors(liveNeighborsCount: number) {
-    return liveNeighborsCount < 2;
-  }
-
-  private isMoreThanThreeLiveNeighbors(liveNeighborsCount: number) {
-    return liveNeighborsCount > 3;
   }
 
   private removeLiveNeighbors() {
