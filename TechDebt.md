@@ -33,4 +33,8 @@
 - [X] `nextPopulation` should check if a live cell has fewer than two live neighbors
 - [X] `nextPopulation` should check if a live cell has two or three live neighbors
 - [X] `nextPopulation` should check if a live cell has more than three live neighbors
-- [X] `nextPopulation` should check if a dead cell has exactly three live neighbors
+- [ ] `nextPopulation` should check if a dead cell has exactly three live neighbors
+
+- [ ] people should be cells in `removeLiveNeighborsOf`
+  - [ ] person should be cell
+- [ ] `removeLiveNeighborsOf` should do the pop() operation on population

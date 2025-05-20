@@ -30,17 +30,22 @@ class Universe {
     const liveNeighborsCount = this.countLiveNeighborsOf(resident);
     if (this.isLessThanTwoLiveNeighbors(liveNeighborsCount)) {
       const newPopulation = this.removeLiveNeighbors();
-      new Universe(newPopulation);
+      // new Universe(newPopulation);
     }
     if (this.isMoreThanThreeLiveNeighbors(liveNeighborsCount)) {
       this.removeLiveNeighbors();
       this.population.pop();
-      new Universe(this.population);
+      // new Universe(this.population);
     }
     if (this.isTwoOrThreeLiveNeighbors(liveNeighborsCount)) {
       this.removeLiveNeighborsOf(resident);
-      if (this.population.length > 1) this.population.pop();
-      new Universe(this.population);
+      if (this.population.length > 1) {
+        // [[Cell], []]
+        this.population.pop();
+        // [[Cell]]
+      }
+
+      // new Universe(this.population);
     }
   }
 
@@ -53,13 +58,12 @@ class Universe {
   }
 
   private removeLiveNeighborsOf(resident: Cell) {
-    const FIRST_ROW = 0;
-    const people = this.population[FIRST_ROW];
-    people
-      .filter((person: Cell) => !resident.equals(person))
-      .map((person: Cell) =>
-        this.population[0].splice(this.population[0].indexOf(person), 1),
+    this.population[0]
+      .filter((cell: Cell) => !resident.equals(cell))
+      .map((cell: Cell) =>
+        this.population[0].splice(this.population[0].indexOf(cell), 1),
       );
+    // this.population.pop();
   }
 
   private removeLiveNeighbors(): Cell[][] {
@@ -119,7 +123,7 @@ describe("Game Of Life Should", () => {
 
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
 
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);
   });
@@ -135,7 +139,7 @@ describe("Game Of Life Should", () => {
       [new Cell(1, 0), new Cell(1, 1), new Cell(1, 2)],
     ];
 
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.currentPopulation()).toEqual(expectedPopulation);
   });
@@ -144,7 +148,7 @@ describe("Game Of Life Should", () => {
     const expectedLiveNeighborsCount = 2;
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
     const resident = new Cell(0, 1);
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
@@ -155,7 +159,7 @@ describe("Game Of Life Should", () => {
     const expectedLiveNeighborsCount = 1;
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1)]];
     const resident = new Cell(0, 1);
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
@@ -170,7 +174,7 @@ describe("Game Of Life Should", () => {
     ];
 
     const resident = new Cell(1, 1);
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
@@ -186,7 +190,7 @@ describe("Game Of Life Should", () => {
     ];
 
     const resident = new Cell(1, 1);
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
 
     expect(universe.countLiveNeighborsOf(resident)).toEqual(
       expectedLiveNeighborsCount,
@@ -195,7 +199,7 @@ describe("Game Of Life Should", () => {
 
   test("kill cell with only one neighbor", () => {
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1)]];
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
     const expectedPopulation = [[]];
 
     universe.nextPopulation(new Cell(0, 1));
@@ -205,7 +209,7 @@ describe("Game Of Life Should", () => {
 
   test("preserve cell with only two live neighbors", () => {
     const populationSeed = [[new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)]];
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
     const expectedPopulation = [[new Cell(0, 1)]];
 
     const resident = new Cell(0, 1);
@@ -220,7 +224,7 @@ describe("Game Of Life Should", () => {
       [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
       [new Cell(1, 1)],
     ];
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
     const expectedPopulation = [[new Cell(0, 1)]];
 
     const resident = new Cell(0, 1);
@@ -235,8 +239,20 @@ describe("Game Of Life Should", () => {
       [new Cell(0, 0), new Cell(0, 1), new Cell(0, 2)],
       [new Cell(1, 0), new Cell(1, 1)],
     ];
-    const universe = new Universe(populationSeed);
+    const universe = new _Universe(populationSeed);
     const expectedPopulation = [[]];
+
+    const resident = new Cell(0, 1);
+
+    universe.nextPopulation(resident);
+
+    expect(universe.currentPopulation()).toEqual(expectedPopulation);
+  });
+
+  test.skip("spawn cell with exactly three live neighbors", () => {
+    const populationSeed = [[new Cell(0, 0), new Cell(0, 2)], [new Cell(1, 0)]];
+    const universe = new _Universe(populationSeed);
+    const expectedPopulation = [[new Cell(0, 1)]];
 
     const resident = new Cell(0, 1);
 
