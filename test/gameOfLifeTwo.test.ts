@@ -34,8 +34,9 @@ class _Universe {
   }
 
   evolve() {
-    let liveNeighborsCount: number = 0;
+    let newPopulation: _Cell[] = [];
     for (let cellIndex = 0; cellIndex < this.population.length; cellIndex++) {
+      let liveNeighborsCount: number = 0;
       let cell = this.population[cellIndex];
       const neighborsPositions = cell.getNeighborsPositions();
       for (
@@ -50,15 +51,19 @@ class _Universe {
           liveNeighborsCount++;
         }
       }
+      if (liveNeighborsCount === 2) {
+        newPopulation.push(this.population[cellIndex]);
+      }
     }
-    if (liveNeighborsCount < 2) {
-      this.population = [];
-    }
+    this.population = newPopulation;
   }
 
   isAlive(x: number, y: number): boolean {
     for (let i = 0; i < this.population.length; i++) {
       let cell = this.population[i];
+      if (cell === undefined) {
+        return false;
+      }
       if (cell.isAt(x, y)) {
         return true;
       }
