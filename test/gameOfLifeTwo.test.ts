@@ -36,26 +36,31 @@ class _Universe {
   evolve() {
     let newPopulation: _Cell[] = [];
     for (let cellIndex = 0; cellIndex < this.population.length; cellIndex++) {
-      let liveNeighborsCount: number = 0;
-      let cell = this.population[cellIndex];
-      const neighborsPositions = cell.getNeighborsPositions();
-      for (
-        let neighborIndex = 0;
-        neighborIndex < neighborsPositions.length;
-        neighborIndex++
-      ) {
-        let neighbor = neighborsPositions[neighborIndex];
-        let x = neighbor[0];
-        let y = neighbor[1];
-        if (this.isAlive(x, y)) {
-          liveNeighborsCount++;
-        }
-      }
+      let liveNeighborsCount = this.countLiveNeighbors(cellIndex);
       if (liveNeighborsCount === 2) {
         newPopulation.push(this.population[cellIndex]);
       }
     }
     this.population = newPopulation;
+  }
+
+  private countLiveNeighbors(cellIndex: number) {
+    let liveNeighborsCount: number = 0;
+    let cell = this.population[cellIndex];
+    const neighborsPositions = cell.getNeighborsPositions();
+    for (
+      let neighborIndex = 0;
+      neighborIndex < neighborsPositions.length;
+      neighborIndex++
+    ) {
+      let neighbor = neighborsPositions[neighborIndex];
+      let x = neighbor[0];
+      let y = neighbor[1];
+      if (this.isAlive(x, y)) {
+        liveNeighborsCount++;
+      }
+    }
+    return liveNeighborsCount;
   }
 
   isAlive(x: number, y: number): boolean {
