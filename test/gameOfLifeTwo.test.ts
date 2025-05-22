@@ -37,7 +37,7 @@ class _Universe {
     let newPopulation: _Cell[] = [];
     for (let cellIndex = 0; cellIndex < this.population.length; cellIndex++) {
       let liveNeighborsCount = this.countLiveNeighbors(cellIndex);
-      if (liveNeighborsCount === 2) {
+      if (liveNeighborsCount === 2 || liveNeighborsCount === 3) {
         newPopulation.push(this.population[cellIndex]);
       }
     }
@@ -66,9 +66,6 @@ class _Universe {
   isAlive(x: number, y: number): boolean {
     for (let i = 0; i < this.population.length; i++) {
       let cell = this.population[i];
-      if (cell === undefined) {
-        return false;
-      }
       if (cell.isAt(x, y)) {
         return true;
       }
@@ -79,7 +76,7 @@ class _Universe {
 
 describe("Game Of Life Should", () => {
   test("Cell is alive at 0,2 is false because not enough neighbors", () => {
-    // _ X _ --> _ _ _
+    // _X_ --> ___
 
     let seed = [new _Cell(1, 0)];
     let universe = new _Universe(seed);
@@ -90,7 +87,7 @@ describe("Game Of Life Should", () => {
   });
 
   test("Cell is alive at 0,2 is true because two neighbors", () => {
-    // XXX --> _ X _
+    // XXX --> _X_
 
     let seed = [new _Cell(0, 0), new _Cell(1, 0), new _Cell(2, 0)];
     let universe = new _Universe(seed);
@@ -98,5 +95,27 @@ describe("Game Of Life Should", () => {
     universe.evolve();
 
     expect(universe.isAlive(1, 0)).toEqual(true);
+  });
+
+  test("Cell is alive at 1,1 is true because three live neighbors", () => {
+    // X_X --> ___
+    // _X_ --> _X_
+    // X__ --> ___
+
+    let seed = [
+      new _Cell(0, 0),
+      new _Cell(1, 1),
+      new _Cell(0, 2),
+      new _Cell(2, 2),
+    ];
+
+    let universe = new _Universe(seed);
+
+    universe.evolve();
+
+    expect(universe.isAlive(1, 1)).toEqual(true);
+    expect(universe.isAlive(0, 0)).toEqual(false);
+    expect(universe.isAlive(0, 2)).toEqual(false);
+    expect(universe.isAlive(2, 2)).toEqual(false);
   });
 });
