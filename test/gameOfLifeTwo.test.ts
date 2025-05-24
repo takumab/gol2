@@ -118,4 +118,24 @@ describe("Game Of Life Should", () => {
     expect(universe.isAlive(0, 2)).toEqual(false);
     expect(universe.isAlive(2, 2)).toEqual(false);
   });
+
+  test("Cell is dead at 1,1 is false because has more than three live neighbors", () => {
+    // X_X --> ___
+    // _X_ --> ___
+    // X_X --> ___
+
+    let seed = [
+      new _Cell(0, 0),
+      new _Cell(1, 1),
+      new _Cell(0, 2),
+      new _Cell(2, 2),
+      new _Cell(2, 0),
+    ];
+
+    let universe = new _Universe(seed);
+
+    universe.evolve();
+
+    expect(universe.isAlive(1, 1)).toEqual(false);
+  });
 });
